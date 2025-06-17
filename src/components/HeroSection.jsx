@@ -5,7 +5,7 @@ function HeroSection() {
     <section
       className="relative bg-gradient-to-r from-black via-gray-900 to-gray-800 text-white min-h-screen flex items-center justify-center px-6"
       style={{
-        backgroundImage: "url('/your-futuristic-background.jpg')",
+        backgroundImage: "url('https://images.unsplash.com/photo-1622994710032-92c3e4dc6e8c?auto=format&fit=crop&w=1950&q=80')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundBlendMode: "overlay",
