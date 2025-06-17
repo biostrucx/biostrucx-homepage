@@ -1,6 +1,6 @@
 // src/App.jsx
 import React from "react";
-import Navbar from "./src/src/components/Navbar.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 function App() {
   return (
