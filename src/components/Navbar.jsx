@@ -19,7 +19,6 @@ function Navbar() {
             { label: "BioX Materials", href: "#materials" },
             { label: "Modular Structures", href: "#modular" },
             { label: "Launchpad", href: "#launchpad" },
-            { label: "BioStrucX Live", href: "#platform" },
             { label: "Impact", href: "#impact" },
           ].map((item) => (
             <a
@@ -30,6 +29,17 @@ function Navbar() {
               {item.label}
             </a>
           ))}
+
+          {/* BioStrucX Live estilo NASA+ */}
+          <div className="flex items-center gap-1">
+            <span className="text-gray-800">BioStrucX</span>
+            <a
+              href="#platform"
+              className="px-1.5 py-0.5 text-xs font-bold text-white bg-red-600 rounded-sm transition-all duration-300 hover:text-red-600 hover:bg-transparent border border-transparent hover:border-red-600"
+            >
+              LIVE
+            </a>
+          </div>
         </nav>
 
         {/* Sección derecha: Shop + More */}
@@ -60,6 +70,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-
