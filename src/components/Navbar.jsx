@@ -1,72 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 
-function Navbar() {
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 50); // cambia fondo del navbar
+      setShowLogin(y > 600); // muestra login después de sección 3 aprox
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="bg-white shadow-md px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black bg-opacity-90 shadow-lg' : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-2xl font-bold text-gray-800 tracking-wide">
+        <div className="text-white font-bold text-2xl tracking-widest">
           BioStrucX
         </div>
 
-        {/* Menú central */}
-        <nav className="flex flex-wrap justify-center gap-x-6 text-sm font-medium text-gray-700">
-          {[
-            { label: "Home", href: "#home" },
-            { label: "Our Mission", href: "#mission" },
-            { label: "BioStruct Design", href: "#design" },
-            { label: "BioX Materials", href: "#materials" },
-            { label: "Modular Structures", href: "#modular" },
-            { label: "Launchpad", href: "#launchpad" },
-            { label: "Impact", href: "#impact" },
-          ].map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="relative text-gray-800 hover:text-blue-400 transition-all duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:opacity-0 hover:after:opacity-100"
-            >
-              {item.label}
-            </a>
-          ))}
+        {/* Navigation Links */}
+        <div className="hidden md:flex gap-8 text-white text-sm font-semibold">
+          <a href="#design" className="hover:text-green-400">BioStruct Design</a>
+          <a href="#modular" className="hover:text-green-400">Modular Structures</a>
+          <a href="#live" className="hover:text-green-400">BioStrucX Live</a>
+          <a href="#shop" className="hover:text-green-400">Shop</a>
+          <a href="#contact" className="hover:text-green-400">Contact</a>
 
-          {/* BioStrucX Live estilo NASA+ */}
-          <div className="flex items-center gap-1">
-            <span className="text-gray-800">BioStrucX</span>
-            <a
-              href="#platform"
-              className="px-1.5 py-0.5 text-xs font-bold text-white bg-red-600 rounded-sm transition-all duration-300 hover:text-red-600 hover:bg-transparent border border-transparent hover:border-red-600"
-            >
-              LIVE
-            </a>
-          </div>
-        </nav>
-
-        {/* Sección derecha: Shop + More */}
-        <div className="flex items-center gap-x-6 text-sm font-medium text-gray-700">
-          <a
-            href="#shop"
-            className="relative text-gray-800 hover:text-blue-400 transition-all duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:opacity-0 hover:after:opacity-100"
-          >
-            Shop
-          </a>
+          {/* Dropdown More */}
           <div className="relative group">
-            <button className="relative text-gray-800 hover:text-blue-400 transition-all duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:opacity-0 group-hover:after:opacity-100">
-              More ▼
-            </button>
-            <div className="absolute right-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-md overflow-hidden z-10">
-              <a href="#careers" className="block px-4 py-2 text-sm hover:bg-gray-100">
-                Careers
-              </a>
-              <a href="#supplier" className="block px-4 py-2 text-sm hover:bg-gray-100">
-                Be a Supplier
-              </a>
+            <button className="hover:text-green-400">More ▾</button>
+            <div className="absolute left-0 mt-2 w-40 bg-black text-white text-sm rounded-md shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <a href="#careers" className="block px-4 py-2 hover:bg-gray-800">Careers</a>
+              <a href="#supplier" className="block px-4 py-2 hover:bg-gray-800">Be a Supplier</a>
             </div>
           </div>
         </div>
+
+        {/* Login Button */}
+        {showLogin && (
+          <div>
+            <a
+              href="/login"
+              className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-xl text-sm font-semibold"
+            >
+              Login
+            </a>
+          </div>
+        )}
       </div>
-    </header>
+    </nav>
   );
-}
+};
 
 export default Navbar;
+
