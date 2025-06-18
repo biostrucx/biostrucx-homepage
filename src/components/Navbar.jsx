@@ -1,59 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+function Navbar() {
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center text-white font-semibold text-sm tracking-wide">
+    <header className="bg-white shadow-md px-6 py-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
         
-        {/* LOGO */}
-        <div className="text-xl font-extrabold">BioStrucX</div>
+        {/* Logo */}
+        <div className="text-2xl font-bold text-gray-800 tracking-wide">
+          BioStrucX
+        </div>
 
-        {/* MENU CENTER */}
-        <div className="hidden md:flex gap-6 items-center">
-          <a href="#home" className="hover:text-green-400">Home</a>
-          <a href="#mission" className="hover:text-green-400">Our Mission</a>
-          <a href="#design" className="hover:text-green-400">BioStruct Design</a>
-          <a href="#materials" className="hover:text-green-400">BioX Materials</a>
-          <a href="#modular" className="hover:text-green-400">Modular Structures</a>
-          <a href="#launchpad" className="hover:text-green-400">Launchpad</a>
-          <a href="#live" className="hover:text-green-400">BioStrucX Live</a>
-          <a href="#impact" className="hover:text-green-400">Impact</a>
-          <a href="#shop" className="hover:text-green-400">Shop</a>
-
-          {/* MORE DROPDOWN */}
-          <div className="relative">
-            <button
-              onClick={() => setShowDropdown(!showDropdown)}
-              className="hover:text-green-400 flex items-center"
+        {/* Menú central */}
+        <nav className="flex flex-wrap justify-center gap-x-6 text-sm font-medium text-gray-700">
+          {[
+            { label: "Home", href: "#home" },
+            { label: "Our Mission", href: "#mission" },
+            { label: "BioStruct Design", href: "#design" },
+            { label: "BioX Materials", href: "#materials" },
+            { label: "Modular Structures", href: "#modular" },
+            { label: "Launchpad", href: "#launchpad" },
+            { label: "Impact", href: "#impact" },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="relative text-gray-800 hover:text-blue-400 transition-all duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:opacity-0 hover:after:opacity-100"
             >
+              {item.label}
+            </a>
+          ))}
+
+          {/* BioStrucX Live estilo NASA+ */}
+          <div className="flex items-center gap-1">
+            <span className="text-gray-800">BioStrucX</span>
+            <a
+              href="#platform"
+              className="px-1.5 py-0.5 text-xs font-bold text-white bg-red-600 rounded-sm transition-all duration-300 hover:text-red-600 hover:bg-transparent border border-transparent hover:border-red-600"
+            >
+              LIVE
+            </a>
+          </div>
+        </nav>
+
+        {/* Sección derecha: Shop + More */}
+        <div className="flex items-center gap-x-6 text-sm font-medium text-gray-700">
+          <a
+            href="#shop"
+            className="relative text-gray-800 hover:text-blue-400 transition-all duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:opacity-0 hover:after:opacity-100"
+          >
+            Shop
+          </a>
+          <div className="relative group">
+            <button className="relative text-gray-800 hover:text-blue-400 transition-all duration-300 after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:opacity-0 group-hover:after:opacity-100">
               More ▼
             </button>
-            {showDropdown && (
-              <div className="absolute right-0 mt-2 w-44 bg-black text-white rounded-md shadow-lg border border-gray-700 z-10">
-                <a href="#careers" className="block px-4 py-2 hover:bg-gray-800">Careers</a>
-                <a href="#supplier" className="block px-4 py-2 hover:bg-gray-800">Be a Supplier</a>
-              </div>
-            )}
+            <div className="absolute right-0 mt-2 hidden group-hover:block bg-white shadow-lg rounded-md overflow-hidden z-10">
+              <a href="#careers" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                Careers
+              </a>
+              <a href="#supplier" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                Be a Supplier
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </nav>
+    </header>
   );
-};
+}
 
 export default Navbar;
