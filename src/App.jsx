@@ -1,3 +1,4 @@
+import LoginPage from './components/LoginPage';
 import React from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
